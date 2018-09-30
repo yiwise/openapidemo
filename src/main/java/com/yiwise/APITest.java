@@ -18,9 +18,9 @@ public class APITest {
 
     public static void main(String[] args) throws UnsupportedEncodingException {
         String result = HttpUrlConnectionUtils.doPost(TEST_URL, getReqParam(), TEST_KEY, TEST_SEC);
-        System.out.print(result);
+        System.out.println(result);
         String result2 = HttpUrlConnectionUtils.doGet(TEST_URL2, getReqParam(), TEST_KEY, TEST_SEC);
-        System.out.print(result2);
+        System.out.println(result2);
     }
 
     private static String getReqParam() throws UnsupportedEncodingException {
@@ -28,8 +28,6 @@ public class APITest {
         req.put("userName", "json");
         req.put("age", "10");
         req.put("m", "zhongan.repair.query");
-        req.put("version", "1.0");
-        req.put("params", "{\"assignNo\":\"TEST018\"}");
         req.put("timestamp", "" + System.currentTimeMillis());
         req.put("signature", SignUtils.sign(req));
 
