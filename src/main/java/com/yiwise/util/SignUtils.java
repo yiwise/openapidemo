@@ -16,7 +16,8 @@ import java.util.TreeMap;
  */
 public class SignUtils {
 
-    public static String sign(TreeMap<String, String> treeMap) throws UnsupportedEncodingException {
+
+    public static String sign(TreeMap<String, Object> treeMap, String tenantSign) throws UnsupportedEncodingException {
         Iterator it = treeMap.entrySet().iterator();
         StringBuilder params = new StringBuilder();
         while (it.hasNext()) {
@@ -28,7 +29,7 @@ public class SignUtils {
             }
         }
         MessageDigest md = DigestUtils.getSha256Digest();
-        byte[] result = md.digest(params.toString().getBytes("UTF-8"));
+        byte[] result = md.digest((tenantSign+params.toString()+tenantSign).getBytes("UTF-8"));
         return Hex.encodeHexString(result);
     }
 

@@ -14,7 +14,7 @@ import java.net.URL;
  */
 public class HttpUrlConnectionUtils {
 
-    public static String doGet(String urlStr, String content, String appKey, String appSecret) {
+    public static String doGet(String urlStr, String content, String appKey, String appSecret, String tenantSign) {
         URL url = null;
         HttpURLConnection connection = null;
         try {
@@ -26,6 +26,7 @@ public class HttpUrlConnectionUtils {
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
             connection.setRequestProperty("app_key", appKey);
             connection.setRequestProperty("app_secret", appSecret);
+            connection.setRequestProperty("tenant_sign", tenantSign);
             connection.setUseCaches(false);
             connection.connect();
 
@@ -49,7 +50,7 @@ public class HttpUrlConnectionUtils {
         return null;
     }
 
-    public static String doPost(String urlStr, String content, String appKey, String appSecret) {
+    public static String doPost(String urlStr, String content, String appKey, String appSecret, String tenantSign) {
         URL url = null;
         HttpURLConnection connection = null;
         try {
@@ -61,6 +62,7 @@ public class HttpUrlConnectionUtils {
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
             connection.setRequestProperty("app_key", appKey);
             connection.setRequestProperty("app_secret", appSecret);
+            connection.setRequestProperty("tenant_sign", tenantSign);
             connection.setUseCaches(false);
             connection.connect();
 
