@@ -14,19 +14,21 @@ import java.net.URL;
  */
 public class HttpUrlConnectionUtils {
 
-    public static String doGet(String urlStr, String content, String appKey, String appSecret, String tenantSign) {
+    public static String doGet(String urlStr, String appKey, String appSecret, String tenantSign, String version, String timestamp) {
         URL url = null;
         HttpURLConnection connection = null;
         try {
-            url = new URL(urlStr+content);
+            url = new URL(urlStr);
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+            connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             connection.setRequestProperty("app_key", appKey);
             connection.setRequestProperty("app_secret", appSecret);
             connection.setRequestProperty("tenant_sign", tenantSign);
+            connection.setRequestProperty("version", version);
+            connection.setRequestProperty("timestamp", timestamp);
             connection.setUseCaches(false);
             connection.connect();
 
@@ -59,7 +61,7 @@ public class HttpUrlConnectionUtils {
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+            connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             connection.setRequestProperty("app_key", appKey);
             connection.setRequestProperty("app_secret", appSecret);
             connection.setRequestProperty("tenant_sign", tenantSign);
