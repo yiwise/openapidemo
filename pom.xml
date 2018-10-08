@@ -74,4 +74,18 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <repositories>
+        <repository>
+            <id>nexus-yiwise</id>
+            <url>http://116.62.135.215:7070/repository/maven-public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus-yiwise</id>
+            <url>http://116.62.135.215:7070/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
 </project>
