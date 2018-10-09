@@ -1,7 +1,13 @@
 package com.yiwise;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yiwise.model.LongStringBO;
+import com.yiwise.model.RobotCallJobPO;
 import com.yiwise.util.HttpUrlConnectionUtils;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 /**
  * 简单模型
@@ -30,7 +36,8 @@ public class SimpleDemo {
 //        String result = updateTask();
 //        String result = startTask();
 //        String result = pauseTask();
-        String result = stopTask();
+//        String result = stopTask();
+        String result = importTaskCustomer();
         System.out.println(result);
     }
 
@@ -85,7 +92,7 @@ public class SimpleDemo {
     private static String getTaskById() {
         String url = "http://localhost:8060/openApi/v1/task/getTaskDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=3";
+        url = url+"?robotCallJobId=1";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
     }
@@ -96,8 +103,25 @@ public class SimpleDemo {
     private static String getCallRecordInfoList() {
         String url = "http://localhost:8060/openApi/v1/task/getCallRecordInfoList";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=3";
-        String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("robotCallJobId", 1);
+        jsonObject.put("searchWords", "测试");
+        jsonObject.put("customerGroupId", 1);
+        Set<String> dialStatusEnumSet = new HashSet<>();
+        dialStatusEnumSet.add("ANSWERED");
+        jsonObject.put("resultStatuses", dialStatusEnumSet);
+        Set<String> intentLevelsEnumSet = new HashSet<>();
+        intentLevelsEnumSet.add("A");
+        jsonObject.put("intentLevels", intentLevelsEnumSet);
+        jsonObject.put("followStatus", "AI_INITIAL_VISIT");
+        jsonObject.put("dialogFlowId", 2);
+        jsonObject.put("earliestCreationTime", "2018-07-25");
+        jsonObject.put("latestCreationTime", "2018-07-25");
+        jsonObject.put("getTrainTaskList", true);
+        jsonObject.put("pageNum", 1);
+        jsonObject.put("pageSize", 20);
+        System.out.println(jsonObject.toJSONString());
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
     }
     /**
@@ -118,39 +142,40 @@ public class SimpleDemo {
     private static String createTask()  {
         String url = "http://localhost:8060/openApi/v1/task/create";
         Long timestamp = System.currentTimeMillis();
-        String params = "{\n" +
-                "\t\"robotCallJob\": {\n" +
-                "\t\t\"tenantId\": 1,\n" +
-                "\t\t\"dialogFlowId\": 2,\n" +
-                "\t\t\"name\": \"测试名称\",\n" +
-                "\t\t\"mode\": \"AUTO\",\n" +
-                "\t\t\"robotCount\": 2,\n" +
-                "\t\t\"dailyStartTime\": \"09:00\",\n" +
-                "\t\t\"dailyEndTime\": \"21:00\",\n" +
-                "\t\t\"inactiveStartTime\": \"12:00\",\n" +
-                "\t\t\"inactiveEndTime\": \"13:00\",\n" +
-                "\t\t\"description\": \"任务描述信息\",\n" +
-                "\t\t\"smsTemplateId\": 1,\n" +
-                "\t\t\"phoneType\": \"UNFIXED_CALL\",\n" +
-                "\t\t\"wechatAlertLevel\": [\n" +
-                "\t\t\t\"A\",\n" +
-                "\t\t\t\"B\"\n" +
-                "\t\t],\n" +
-                "\t\t\"smsAlertLevel\": [\"A\",\"B\"],\n" +
-                "\t\t\"alertUsers\": [\n" +
-                "\t\t\t1,\n" +
-                "\t\t\t5\n" +
-                "\t\t],\n" +
-                "\t\t\"earlyWarningAlertUsers\": [1, 2],\n" +
-                "\t\t\"startTime\": \"2017-11-21 04:32:56\",\n" +
-                "\t\t\"wechatSendMethod\": \"SENDTOALL\"\n" +
-                "\t},\n" +
-                "\t\"jobTasksFileUrl\": \"http://www.baidu.com\",\n" +
-                "\t\"jobPhoneNumberList\": [{\n" +
-                "\t\t\"key\": 1\n" +
-                "\t}]\n" +
-                "}";
-        String result = HttpUrlConnectionUtils.doPost(url, params, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        JSONObject jsonObject = new JSONObject();
+        RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
+        robotCallJobPO.setTenantId(1L);
+        robotCallJobPO.setDialogFlowId(2L);
+        robotCallJobPO.setName("测试名称");
+        robotCallJobPO.setMode("AUTO");
+        robotCallJobPO.setRobotCount(10);
+        robotCallJobPO.setDailyStartTime(LocalTime.of(9, 0));
+        robotCallJobPO.setDailyEndTime(LocalTime.of(21, 0));
+        robotCallJobPO.setInactiveStartTime(LocalTime.of(12, 0));
+        robotCallJobPO.setInactiveEndTime(LocalTime.of(13, 0));
+        robotCallJobPO.setDescription("gthjoitjdjfdk");
+        robotCallJobPO.setSmsTemplateId(1L);
+        robotCallJobPO.setPhoneType("LANDLINE");
+        Set<String> wechatAlertLevel = new HashSet<>();
+        robotCallJobPO.setWechatAlertLevel(wechatAlertLevel);
+        Set<String> smsAlertLevel = new HashSet<>();
+        smsAlertLevel.add("A");
+        robotCallJobPO.setSmsAlertLevel(smsAlertLevel);
+        Set<Long> alertUsers = new HashSet<>();
+        robotCallJobPO.setAlertUsers(alertUsers);
+        Set<Long> earlyWarning = new HashSet<>();
+        robotCallJobPO.setEarlyWarningAlertUsers(earlyWarning);
+        robotCallJobPO.setStartTime(LocalDateTime.of(2017, 11, 21, 4,32));
+        robotCallJobPO.setWechatSendMethod("SENDTOALL");
+        jsonObject.put("robotCallJob", robotCallJobPO);
+        List<LongStringBO> longStringBOS = new ArrayList<>();
+        LongStringBO longStringBO = new LongStringBO();
+        longStringBO.setKey(348L);
+        longStringBO.setValue("test");
+        longStringBOS.add(longStringBO);
+        jsonObject.put("jobPhoneNumberList",longStringBOS);
+        System.out.println(jsonObject.toJSONString());
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
     }
     /**
@@ -161,47 +186,54 @@ public class SimpleDemo {
         String url = "http://localhost:8060/openApi/v1/task/delete";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 15);
+        jsonObject.put("robotCallJobId", 30);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
     }
-    /**
-     * 修改任务
-     * @return
-     */
-    private static String updateTask()  {
-        String url = "http://localhost:8060/openApi/v1/task/create";
-        Long timestamp = System.currentTimeMillis();
-        String params = "{\n" +
-                "\t\"robotCallJob\": {\n" +
-                "\t\t\"robotCallJobId\": 2,\n" +
-                "\t\t\"name\": \"测试2\",\n" +
-                "\t\t\"mode\": \"AUTO\",\n" +
-                "\t\t\"dailyStartTime\": \"09:00\",\n" +
-                "\t\t\"dailyEndTime\": \"21:00\",\n" +
-                "\t\t\"inactiveStartTime\": \"12:00\",\n" +
-                "\t\t\"inactiveEndTime\": \"13:00\",\n" +
-                "\t\t\"description\": \"任务描述信息\",\n" +
-                "\t\t\"smsTemplateId\": 1,\n" +
-                "\t\t\"robotCount\": 2,\n" +
-                "\t\t\"wechatAlertLevel\": [\n" +
-                "\t\t\t\"A\",\n" +
-                "\t\t\t\"B\"\n" +
-                "\t\t],\n" +
-                "\t\t\"smsAlertLevel\": [],\n" +
-                "\t\t\"alertUsers\": [\n" +
-                "\t\t\t1,\n" +
-                "\t\t\t5\n" +
-                "\t\t],\n" +
-                "\t\t\"startTime\": \"2017-11-21 04:32:56\"\n" +
-                "\t},\n" +
-                "\t\"jobPhoneNumberList\": [\n" +
-                "\t\t1\n" +
-                "\t]\n" +
-                "}";
-        String result = HttpUrlConnectionUtils.doPost(url, params, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
-    }
+//    /**
+//     * 修改任务
+//     * @return
+//     */
+//    private static String updateTask()  {
+//        String url = "http://localhost:8060/openApi/v1/task/modify";
+//        Long timestamp = System.currentTimeMillis();
+//        JSONObject jsonObject = new JSONObject();
+//        RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
+//        robotCallJobPO.setRobotCallJobId(31L);
+//        robotCallJobPO.setTenantId(1L);
+//        robotCallJobPO.setDialogFlowId(2L);
+//        robotCallJobPO.setName("测试名称3333");
+//        robotCallJobPO.setMode("AUTO");
+//        robotCallJobPO.setRobotCount(10);
+//        robotCallJobPO.setDailyStartTime(LocalTime.of(9, 0));
+//        robotCallJobPO.setDailyEndTime(LocalTime.of(21, 0));
+//        robotCallJobPO.setInactiveStartTime(LocalTime.of(12, 0));
+//        robotCallJobPO.setInactiveEndTime(LocalTime.of(13, 0));
+//        robotCallJobPO.setDescription("gthjoitjdjfdk");
+//        robotCallJobPO.setSmsTemplateId(1L);
+//        robotCallJobPO.setPhoneType("LANDLINE");
+//        Set<String> wechatAlertLevel = new HashSet<>();
+//        robotCallJobPO.setWechatAlertLevel(wechatAlertLevel);
+//        Set<String> smsAlertLevel = new HashSet<>();
+//        smsAlertLevel.add("A");
+//        robotCallJobPO.setSmsAlertLevel(smsAlertLevel);
+//        Set<Long> alertUsers = new HashSet<>();
+//        robotCallJobPO.setAlertUsers(alertUsers);
+//        Set<Long> earlyWarning = new HashSet<>();
+//        robotCallJobPO.setEarlyWarningAlertUsers(earlyWarning);
+//        robotCallJobPO.setStartTime(LocalDateTime.of(2017, 11, 21, 4,32));
+//        robotCallJobPO.setWechatSendMethod("SENDTOALL");
+//        jsonObject.put("robotCallJob", robotCallJobPO);
+//        List<LongStringBO> longStringBOS = new ArrayList<>();
+//        LongStringBO longStringBO = new LongStringBO();
+//        longStringBO.setKey(348L);
+//        longStringBO.setValue("test");
+//        longStringBOS.add(longStringBO);
+//        jsonObject.put("jobPhoneNumberList",longStringBOS);
+//        System.out.println(jsonObject.toJSONString());
+//        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+//        return result;
+//    }
     /**
      * 开启任务
      * @return
@@ -210,7 +242,7 @@ public class SimpleDemo {
         String url = "http://localhost:8060/openApi/v1/task/start";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 10);
+        jsonObject.put("robotCallJobId", 31);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
     }
@@ -234,6 +266,19 @@ public class SimpleDemo {
      */
     private static String stopTask()  {
         String url = "http://localhost:8060/openApi/v1/task/stop";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("robotCallJobId", 10);
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        return result;
+    }
+
+    /**
+     * 向任务中导入客户
+     * @return
+     */
+    private static String importTaskCustomer()  {
+        String url = "http://localhost:8060/openApi/v1/task/importTaskCustomer";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 10);
