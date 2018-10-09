@@ -5,6 +5,7 @@ import com.yiwise.model.LongStringBO;
 import com.yiwise.model.RobotCallJobPO;
 import com.yiwise.util.HttpUrlConnectionUtils;
 
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
@@ -23,21 +24,21 @@ public class SimpleDemo {
 
     public static final String VERSION = "v1";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        String result = getCompanyList();
 //        String result = getPhoneList();
 //        String result = getRobotList();
 //        String result = getTasks();
 //        String result = getTaskById();
 //        String result = getCallRecordInfoList();
-//        String result = callDetail();
+        String result = callDetail();
 //        String result = createTask();
 //        String result = deleteTask();
 //        String result = updateTask();
 //        String result = startTask();
 //        String result = pauseTask();
 //        String result = stopTask();
-        String result = importTaskCustomer();
+//        String result = importTaskCustomer();
         System.out.println(result);
     }
 
@@ -78,10 +79,10 @@ public class SimpleDemo {
      * 获取任务列表
      * @return
      */
-    private static String getTasks() {
+    private static String getTasks() throws Exception {
         String url = "http://localhost:8060/openApi/v1/task/getTasks";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?name=dialog"+"&status=TERMINATE"+"&pageNum=1"+"&pageSize=20";
+        url = url+"?name="+ URLEncoder.encode("测试","utf-8") +"&status=IN_PROCESS"+"&pageNum=1"+"&pageSize=20";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
     }
@@ -92,7 +93,7 @@ public class SimpleDemo {
     private static String getTaskById() {
         String url = "http://localhost:8060/openApi/v1/task/getTaskDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=1";
+        url = url+"?robotCallJobId=28";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
     }
@@ -104,7 +105,7 @@ public class SimpleDemo {
         String url = "http://localhost:8060/openApi/v1/task/getCallRecordInfoList";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 1);
+        jsonObject.put("robotCallJobId", 28);
         jsonObject.put("searchWords", "测试");
         jsonObject.put("customerGroupId", 1);
         Set<String> dialStatusEnumSet = new HashSet<>();
