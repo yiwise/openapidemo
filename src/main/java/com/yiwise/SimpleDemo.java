@@ -1,6 +1,7 @@
 package com.yiwise;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yiwise.model.CustomerPersonImportVO;
 import com.yiwise.model.LongStringBO;
 import com.yiwise.model.RobotCallJobPO;
 import com.yiwise.util.HttpUrlConnectionUtils;
@@ -31,14 +32,15 @@ public class SimpleDemo {
 //        String result = getTasks();
 //        String result = getTaskById();
 //        String result = getCallRecordInfoList();
-        String result = callDetail();
+//        String result = callDetail();
 //        String result = createTask();
 //        String result = deleteTask();
 //        String result = updateTask();
 //        String result = startTask();
 //        String result = pauseTask();
 //        String result = stopTask();
-//        String result = importTaskCustomer();
+        String result = importTaskCustomer();
+//        String result = updateTaskAiCount();
         System.out.println(result);
     }
 
@@ -282,7 +284,36 @@ public class SimpleDemo {
         String url = "http://localhost:8060/openApi/v1/task/importTaskCustomer";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 10);
+//        RobotCallJobImportVO robotCallJobImportVO = new RobotCallJobImportVO();
+//        robotCallJobImportVO.setRobotCallJobId(28L);
+        List<CustomerPersonImportVO> customerPersons = new ArrayList<>();
+        CustomerPersonImportVO customerPersonImportVO = new CustomerPersonImportVO();
+        customerPersonImportVO.setName("test");
+        customerPersonImportVO.setPhoneNumber("11111111111");
+        Map<String, String> properties = new HashMap<>();
+        properties.put("ss", "jjj");
+        customerPersonImportVO.setProperties(properties);
+        customerPersons.add(customerPersonImportVO);
+//        robotCallJobImportVO.setCustomerPersons(customerPersons);
+
+        jsonObject.put("robotCallJobId", 28);
+        jsonObject.put("customerPersons", customerPersons);
+        System.out.println(jsonObject.toJSONString());
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        return result;
+    }
+
+    /**
+     * 修改任务并发数
+     * @return
+     */
+    private static String updateTaskAiCount()  {
+        String url = "http://localhost:8060/openApi/v1/task/updateTaskAiCount";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("robotCallJobId", 28);
+        jsonObject.put("robotCount", 2);
+        System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
     }
