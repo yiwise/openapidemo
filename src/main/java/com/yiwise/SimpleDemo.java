@@ -284,8 +284,6 @@ public class SimpleDemo {
         String url = "http://localhost:8060/openApi/v1/task/importTaskCustomer";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-//        RobotCallJobImportVO robotCallJobImportVO = new RobotCallJobImportVO();
-//        robotCallJobImportVO.setRobotCallJobId(28L);
         List<CustomerPersonImportVO> customerPersons = new ArrayList<>();
         CustomerPersonImportVO customerPersonImportVO = new CustomerPersonImportVO();
         customerPersonImportVO.setName("test");
@@ -294,8 +292,6 @@ public class SimpleDemo {
         properties.put("ss", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-//        robotCallJobImportVO.setCustomerPersons(customerPersons);
-
         jsonObject.put("robotCallJobId", 28);
         jsonObject.put("customerPersons", customerPersons);
         System.out.println(jsonObject.toJSONString());
