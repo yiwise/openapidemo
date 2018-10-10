@@ -24,9 +24,9 @@ public class HttpUrlConnectionUtils {
             connection.setDoInput(true);
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-            connection.setRequestProperty("app_key", appKey);
-            connection.setRequestProperty("app_secret", appSecret);
-            connection.setRequestProperty("tenant_sign", tenantSign);
+            connection.setRequestProperty("appKey", appKey);
+            connection.setRequestProperty("appSecret", appSecret);
+            connection.setRequestProperty("tenantSign", tenantSign);
             connection.setRequestProperty("version", version);
             connection.setRequestProperty("timestamp", timestamp);
             String signature = SignUtils.sign(appKey, appSecret, tenantSign, version, timestamp);
@@ -66,9 +66,9 @@ public class HttpUrlConnectionUtils {
             connection.setDoInput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-            connection.setRequestProperty("app_key", appKey);
-            connection.setRequestProperty("app_secret", appSecret);
-            connection.setRequestProperty("tenant_sign", tenantSign);
+            connection.setRequestProperty("appKey", appKey);
+            connection.setRequestProperty("appSecret", appSecret);
+            connection.setRequestProperty("tenantSign", tenantSign);
             connection.setRequestProperty("version", version);
             connection.setRequestProperty("timestamp", timestamp);
             String signature = SignUtils.sign(appKey, appSecret, tenantSign, version, timestamp);
