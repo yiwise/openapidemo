@@ -1,9 +1,9 @@
 package com.yiwise.util;
 
-import java.io.BufferedReader;
+import org.apache.commons.io.IOUtils;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -34,15 +34,17 @@ public class HttpUrlConnectionUtils {
             connection.setUseCaches(false);
             connection.connect();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-            StringBuffer buffer = new StringBuffer();
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line);
+            // 回调的结果
+            int responseCode = connection.getResponseCode();
+            // 结果
+            String result = "";
+            if (responseCode!=200) {
+                result = IOUtils.toString(connection.getErrorStream());
+            } else {
+                result = IOUtils.toString(connection.getInputStream());
             }
-            reader.close();
 
-            return buffer.toString();
+            return result;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -74,22 +76,26 @@ public class HttpUrlConnectionUtils {
             connection.setUseCaches(false);
             connection.connect();
 
+
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());
             out.write(content.getBytes("UTF-8"));
             out.flush();
             out.close();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-            StringBuffer buffer = new StringBuffer();
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line);
+            // 回调的结果
+            int responseCode = connection.getResponseCode();
+            // 结果
+            String result = "";
+            if (responseCode!=200) {
+                result = IOUtils.toString(connection.getErrorStream());
+            } else {
+                result = IOUtils.toString(connection.getInputStream());
             }
-            reader.close();
 
-            return buffer.toString();
+            return result;
         } catch (IOException e) {
             e.printStackTrace();
+
         } finally {
             if (connection != null) {
                 connection.disconnect();

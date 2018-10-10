@@ -39,8 +39,8 @@ public class SimpleDemo {
 //        String result = startTask();
 //        String result = pauseTask();
 //        String result = stopTask();
-        String result = importTaskCustomer();
-//        String result = updateTaskAiCount();
+//        String result = importTaskCustomer();
+        String result = updateTaskAiCount();
         System.out.println(result);
     }
 
@@ -308,7 +308,7 @@ public class SimpleDemo {
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 28);
-        jsonObject.put("robotCount", 2);
+        jsonObject.put("robotCount", 300);
         System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         return result;
