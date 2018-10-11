@@ -35,14 +35,14 @@ public class SimpleDemo {
 //        getTasks();
 //        getTaskById();
 //        getCallRecordInfoList();
-        callDetail();
-//        createTask();
+//        callDetail();
+        createTask();
 //        deleteTask();
 //        updateTask();
-//        startTask();
 //        pauseTask();
 //        stopTask();
-//        importTaskCustomer();
+        importTaskCustomer();
+        startTask();
 //        updateTaskAiCount();
     }
 
@@ -155,9 +155,9 @@ public class SimpleDemo {
         JSONObject jsonObject = new JSONObject();
         RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
         robotCallJobPO.setTenantId(1L);
-        robotCallJobPO.setDialogFlowId(2L);
-        robotCallJobPO.setName("测试名称");
-        robotCallJobPO.setMode("AUTO");
+        robotCallJobPO.setDialogFlowId(145L);
+        robotCallJobPO.setName("测试名称1011-03");
+        robotCallJobPO.setMode("MANUAL");
         robotCallJobPO.setRobotCount(10);
         robotCallJobPO.setDailyStartTime(LocalTime.of(9, 0));
         robotCallJobPO.setDailyEndTime(LocalTime.of(21, 0));
@@ -180,7 +180,7 @@ public class SimpleDemo {
         jsonObject.put("robotCallJob", robotCallJobPO);
         List<LongStringBO> longStringBOS = new ArrayList<>();
         LongStringBO longStringBO = new LongStringBO();
-        longStringBO.setKey(348L);
+        longStringBO.setKey(354L);
         longStringBO.setValue("test");
         longStringBOS.add(longStringBO);
         jsonObject.put("jobPhoneNumberList",longStringBOS);
@@ -252,7 +252,7 @@ public class SimpleDemo {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/start";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 28);
+        jsonObject.put("robotCallJobId", 41);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -294,12 +294,12 @@ public class SimpleDemo {
         List<CustomerPersonImportVO> customerPersons = new ArrayList<>();
         CustomerPersonImportVO customerPersonImportVO = new CustomerPersonImportVO();
         customerPersonImportVO.setName("test");
-        customerPersonImportVO.setPhoneNumber("11111111111");
+        customerPersonImportVO.setPhoneNumber("15088790310");
         Map<String, String> properties = new HashMap<>();
-        properties.put("ss", "jjj");
+        properties.put("变量", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-        jsonObject.put("robotCallJobId", 28);
+        jsonObject.put("robotCallJobId", 41);
         jsonObject.put("customerPersons", customerPersons);
         System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
