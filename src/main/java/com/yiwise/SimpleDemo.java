@@ -6,6 +6,7 @@ import com.yiwise.model.LongStringBO;
 import com.yiwise.model.RobotCallJobPO;
 import com.yiwise.util.HttpUrlConnectionUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,92 +26,97 @@ public class SimpleDemo {
 
     public static final String VERSION = "v1";
 
-    public static void main(String[] args) throws Exception {
-//        String result = getCompanyList();
-//        String result = getPhoneList();
-        String result = getRobotList();
-//        String result = getTasks();
-//        String result = getTaskById();
-//        String result = getCallRecordInfoList();
-//        String result = callDetail();
-//        String result = createTask();
-//        String result = deleteTask();
-//        String result = updateTask();
-//        String result = startTask();
-//        String result = pauseTask();
-//        String result = stopTask();
-//        String result = importTaskCustomer();
-//        String result = updateTaskAiCount();
-        System.out.println(result);
+    public static final String URL = "http://robot.yiwise.cn";
+
+    public static void main(String[] args) {
+//        getCompanyList();
+//        getPhoneList();
+//        getRobotList();
+//        getTasks();
+//        getTaskById();
+//        getCallRecordInfoList();
+        callDetail();
+//        createTask();
+//        deleteTask();
+//        updateTask();
+//        startTask();
+//        pauseTask();
+//        stopTask();
+//        importTaskCustomer();
+//        updateTaskAiCount();
     }
 
     /**
      * 公司列表
      * @return
      */
-    private static String getCompanyList() {
+    private static void getCompanyList() {
         String url = "https://robot.yiwise.com/apiOpen/v1/company/getCompanies";
 //        String url = "http://localhost:8060/apiOpen/v1/company/getCompanies";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 
     /**
      * 电话线列表
      * @return
      */
-    private static String getPhoneList() {
+    private static void getPhoneList() {
         String url = "https://robot.yiwise.com/apiOpen/v1/company/getPhones";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 
     /**
      * 机器人列表
      * @return
      */
-    private static String getRobotList() {
+    private static void getRobotList() {
         String url = "https://robot.yiwise.com/apiOpen/v1/company/getRobots";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 
     /**
      * 获取任务列表
      * @return
      */
-    private static String getTasks() throws Exception {
+    private static void getTasks() {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/getTasks";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?name="+ URLEncoder.encode("测试","utf-8") +"&status=IN_PROCESS"+"&pageNum=1"+"&pageSize=20";
+        try {
+            url = url+"?name="+ URLEncoder.encode("测试","utf-8") +"&status=IN_PROCESS"+"&pageNum=1"+"&pageSize=20";
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
     /**
      * 获取某个任务信息
      * @return
      */
-    private static String getTaskById() {
+    private static void getTaskById() {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/getTaskDetail";
         Long timestamp = System.currentTimeMillis();
         url = url+"?robotCallJobId=28";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
     /**
-     * 获取通话记录
+     * 获取已呼电话列表
      * @return
      */
-    private static String getCallRecordInfoList() {
+    private static void getCallRecordInfoList() {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/getCallRecordInfoList";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 28);
         jsonObject.put("searchWords", "测试");
-        jsonObject.put("customerGroupId", 1);
+//        jsonObject.put("customerGroupId", 1);
         Set<String> dialStatusEnumSet = new HashSet<>();
         dialStatusEnumSet.add("ANSWERED");
         jsonObject.put("resultStatuses", dialStatusEnumSet);
@@ -126,24 +132,24 @@ public class SimpleDemo {
         jsonObject.put("pageSize", 20);
         System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
     /**
      * 获取通话记录详情
      * @return
      */
-    private static String callDetail() {
+    private static void callDetail() {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/callDetail";
         Long timestamp = System.currentTimeMillis();
         url = url+"?callRecordId=1";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
     /**
      * 创建任务
      * @return
      */
-    private static String createTask()  {
+    private static void createTask()  {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/create";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
@@ -180,19 +186,19 @@ public class SimpleDemo {
         jsonObject.put("jobPhoneNumberList",longStringBOS);
         System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
     /**
      * 删除任务
      * @return
      */
-    private static String deleteTask()  {
+    private static void deleteTask()  {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/delete";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 30);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 //    /**
 //     * 修改任务
@@ -242,46 +248,46 @@ public class SimpleDemo {
      * 开启任务
      * @return
      */
-    private static String startTask()  {
+    private static void startTask()  {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/start";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 31);
+        jsonObject.put("robotCallJobId", 28);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 
     /**
      * 开启任务
      * @return
      */
-    private static String pauseTask()  {
+    private static void pauseTask()  {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/pause";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 10);
+        jsonObject.put("robotCallJobId", 28);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 
     /**
      * 开启任务
      * @return
      */
-    private static String stopTask()  {
+    private static void stopTask()  {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/stop";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 10);
+        jsonObject.put("robotCallJobId", 28);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 
     /**
      * 向任务中导入客户
      * @return
      */
-    private static String importTaskCustomer()  {
+    private static void importTaskCustomer()  {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/importTaskCustomer";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
@@ -297,22 +303,21 @@ public class SimpleDemo {
         jsonObject.put("customerPersons", customerPersons);
         System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 
     /**
      * 修改任务并发数
      * @return
      */
-    private static String updateTaskAiCount()  {
+    private static void updateTaskAiCount()  {
         String url = "https://robot.yiwise.com/apiOpen/v1/task/updateTaskAiCount";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 28);
-        jsonObject.put("robotCount", 300);
-        System.out.println(jsonObject.toJSONString());
+        jsonObject.put("robotCount", 1);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
-        return result;
+        System.out.println(result);
     }
 
 }
