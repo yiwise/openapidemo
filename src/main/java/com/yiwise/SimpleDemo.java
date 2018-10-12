@@ -31,7 +31,7 @@ public class SimpleDemo {
     public static void main(String[] args) {
 //        getCompanyList();
 //        getPhoneList();
-//        getRobotList();
+        getRobotList();
 //        getTasks();
 //        getTaskById();
 //        getCallRecordInfoList();
@@ -42,7 +42,7 @@ public class SimpleDemo {
 //        pauseTask();
 //        stopTask();
 //        importTaskCustomer();
-        startTask();
+//        startTask();
 //        updateTaskAiCount();
     }
 
