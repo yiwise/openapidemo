@@ -29,20 +29,20 @@ public class SimpleDemo {
     public static final String URL = "http://robot.yiwise.cn";
 
     public static void main(String[] args) {
-//        getCompanyList();
+        getCompanyList();
 //        getPhoneList();
 //        getRobotList();
 //        getTasks();
 //        getTaskById();
 //        getCallRecordInfoList();
 //        callDetail();
-        createTask();
+//        createTask();
 //        deleteTask();
 //        updateTask();
 //        pauseTask();
 //        stopTask();
-        importTaskCustomer();
-        startTask();
+//        importTaskCustomer();
+//        startTask();
 //        updateTaskAiCount();
     }
 
@@ -51,8 +51,8 @@ public class SimpleDemo {
      * @return
      */
     private static void getCompanyList() {
-        String url = "https://robot.yiwise.com/apiOpen/v1/company/getCompanies";
-//        String url = "http://localhost:8060/apiOpen/v1/company/getCompanies";
+//        String url = "https://robot.yiwise.com/apiOpen/v1/company/getCompanies";
+        String url = "http://localhost:8060/apiOpen/v1/company/getCompanies";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
