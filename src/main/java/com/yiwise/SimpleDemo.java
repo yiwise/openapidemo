@@ -26,14 +26,14 @@ public class SimpleDemo {
 
     public static final String VERSION = "v1";
 
-    public static final String URL = "http://robot.yiwise.cn";
+    public static final String URL = "https://crm.yiwise.com";
 
     public static void main(String[] args) {
 //        getCompanyList();
 //        getPhoneList();
-        getRobotList();
-//        getTasks();
-//        getTaskById();
+//        getRobotList();
+        getTasks();
+        getTaskById();
 //        getCallRecordInfoList();
 //        callDetail();
 //        createTask();
@@ -51,8 +51,7 @@ public class SimpleDemo {
      * @return
      */
     private static void getCompanyList() {
-        String url = "https://robot.yiwise.com/apiOpen/v1/company/getCompanies";
-//        String url = "http://localhost:8060/apiOpen/v1/company/getCompanies";
+        String url = URL+"/apiOpen/v1/company/getCompanies";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
@@ -63,7 +62,7 @@ public class SimpleDemo {
      * @return
      */
     private static void getPhoneList() {
-        String url = "https://robot.yiwise.com/apiOpen/v1/company/getPhones";
+        String url = URL+"/apiOpen/v1/company/getPhones";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
@@ -74,7 +73,7 @@ public class SimpleDemo {
      * @return
      */
     private static void getRobotList() {
-        String url = "https://robot.yiwise.com/apiOpen/v1/company/getRobots";
+        String url = URL+"/apiOpen/v1/company/getRobots";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
@@ -85,7 +84,7 @@ public class SimpleDemo {
      * @return
      */
     private static void getTasks() {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/getTasks";
+        String url = URL+"/apiOpen/v1/task/getTasks";
         Long timestamp = System.currentTimeMillis();
         try {
             url = url+"?name="+ URLEncoder.encode("测试","utf-8") +"&status=IN_PROCESS"+"&pageNum=1"+"&pageSize=20";
@@ -100,9 +99,9 @@ public class SimpleDemo {
      * @return
      */
     private static void getTaskById() {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/getTaskDetail";
+        String url = URL+"/apiOpen/v1/task/getTaskDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=28";
+        url = url+"?robotCallJobId=121";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -111,7 +110,7 @@ public class SimpleDemo {
      * @return
      */
     private static void getCallRecordInfoList() {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/getCallRecordInfoList";
+        String url = URL+"/apiOpen/v1/task/getCallRecordInfoList";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 28);
@@ -139,7 +138,7 @@ public class SimpleDemo {
      * @return
      */
     private static void callDetail() {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/callDetail";
+        String url = URL+"/apiOpen/v1/task/callDetail";
         Long timestamp = System.currentTimeMillis();
         url = url+"?callRecordId=1";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
@@ -150,7 +149,7 @@ public class SimpleDemo {
      * @return
      */
     private static void createTask()  {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/create";
+        String url = URL+"/apiOpen/v1/task/create";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
@@ -249,7 +248,7 @@ public class SimpleDemo {
      * @return
      */
     private static void startTask()  {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/start";
+        String url = URL+"/apiOpen/v1/task/start";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 46);
@@ -262,7 +261,7 @@ public class SimpleDemo {
      * @return
      */
     private static void pauseTask()  {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/pause";
+        String url = URL+"/apiOpen/v1/task/pause";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 28);
@@ -275,7 +274,7 @@ public class SimpleDemo {
      * @return
      */
     private static void stopTask()  {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/stop";
+        String url = URL+"/apiOpen/v1/task/stop";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 28);
@@ -288,7 +287,7 @@ public class SimpleDemo {
      * @return
      */
     private static void importTaskCustomer()  {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/importTaskCustomer";
+        String url = URL+"/apiOpen/v1/task/importTaskCustomer";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         List<CustomerPersonImportVO> customerPersons = new ArrayList<>();
@@ -311,7 +310,7 @@ public class SimpleDemo {
      * @return
      */
     private static void updateTaskAiCount()  {
-        String url = "https://robot.yiwise.com/apiOpen/v1/task/updateTaskAiCount";
+        String url = URL+"/apiOpen/v1/task/updateTaskAiCount";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotCallJobId", 28);
