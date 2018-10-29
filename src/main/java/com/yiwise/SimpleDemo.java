@@ -27,13 +27,14 @@ public class SimpleDemo {
     public static final String VERSION = "v1";
 
     public static final String URL = "https://crm.yiwise.com";
+//    public static final String URL = "http://127.0.0.1:8060";
 
     public static void main(String[] args) {
-//        getCompanyList();
-//        getPhoneList();
-//        getRobotList();
-        getTasks();
-        getTaskById();
+        getCompanyList();
+        getPhoneList();
+        getRobotList();
+//        getTasks();
+//        getTaskById();
 //        getCallRecordInfoList();
 //        callDetail();
 //        createTask();
@@ -51,7 +52,7 @@ public class SimpleDemo {
      * @return
      */
     private static void getCompanyList() {
-        String url = URL+"/apiOpen/v1/company/getCompanies";
+        String url = URL+"/apiOpen/v1/tenant/getTenants";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
@@ -62,7 +63,7 @@ public class SimpleDemo {
      * @return
      */
     private static void getPhoneList() {
-        String url = URL+"/apiOpen/v1/company/getPhones";
+        String url = URL+"/apiOpen/v1/tenant/getPhones";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
@@ -73,7 +74,7 @@ public class SimpleDemo {
      * @return
      */
     private static void getRobotList() {
-        String url = URL+"/apiOpen/v1/company/getRobots";
+        String url = URL+"/apiOpen/v1/tenant/getRobots";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
@@ -298,7 +299,7 @@ public class SimpleDemo {
         properties.put("变量", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-        jsonObject.put("robotCallJobId", 46);
+        jsonObject.put("robotCallJobId", 121);
         jsonObject.put("customerPersons", customerPersons);
         System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
