@@ -6,8 +6,6 @@ import com.yiwise.model.LongStringBO;
 import com.yiwise.model.RobotCallJobPO;
 import com.yiwise.util.HttpUrlConnectionUtils;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
@@ -19,6 +17,8 @@ import java.util.*;
  */
 public class SimpleDemo {
 
+//    public static String APP_KEY = "WPFZXuFdwogAZmyw";
+//    public static String APP_SECRET = "LlzdUeqsCzsEoMmOODMjEIGGhOqiGzED";
     public static String APP_KEY = "gvlfIPLJTMEAHgyM";
     public static String APP_SECRET = "TuPngoiRCvpxYdOHcQOsWYvaLGhATNiW";
 
@@ -26,17 +26,22 @@ public class SimpleDemo {
 
     public static final String VERSION = "v1";
 
-    public static final String URL = "https://crm.tanyibot.com";
-//    public static final String URL = "http://127.0.0.1:8060";
+//    public static final String URL = "https://crm.tanyibot.com";
+    public static final String URL = "http://127.0.0.1:8060";
 
     public static void main(String[] args) {
-        getCompanyList();
+//        getCompanyList();
 //        getPhoneList();
 //        getRobotList();
+        for (int i=0; i<10000; i++) {
+//            System.out.println(i);
 //        getTasks();
-//        getTaskById();
+//            getTaskById();
+
 //        getCallRecordInfoList();
-//        callDetail();
+        }
+        callDetail();
+
 //        createTask();
 //        deleteTask();
 //        updateTask();
@@ -87,11 +92,11 @@ public class SimpleDemo {
     private static void getTasks() {
         String url = URL+"/apiOpen/v1/task/getTasks";
         Long timestamp = System.currentTimeMillis();
-        try {
-            url = url+"?name="+ URLEncoder.encode("测试","utf-8") +"&status=IN_PROCESS"+"&pageNum=1"+"&pageSize=20";
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            url = url+"?name="+ URLEncoder.encode("测试","utf-8") +"&status=IN_PROCESS"+"&pageNum=1"+"&pageSize=20";
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -102,7 +107,7 @@ public class SimpleDemo {
     private static void getTaskById() {
         String url = URL+"/apiOpen/v1/task/getTaskDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=121";
+        url = url+"?robotCallJobId=641";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
