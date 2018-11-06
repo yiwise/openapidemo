@@ -8,7 +8,6 @@ import com.yiwise.util.HttpUrlConnectionUtils;
 import org.junit.Test;
 
 import java.net.URLEncoder;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -159,7 +158,7 @@ public class ApiDemo {
         robotCallJobPO.setAlertUsers(alertUsers);
         Set<Long> earlyWarning = new HashSet<>();
         robotCallJobPO.setEarlyWarningAlertUsers(earlyWarning);
-        robotCallJobPO.setStartTime(LocalDateTime.of(2017, 11, 21, 4,32));
+        robotCallJobPO.setStartTime("");
         robotCallJobPO.setWechatSendMethod("SENDTOALL");
         jsonObject.put("robotCallJob", robotCallJobPO);
         List<LongStringBO> longStringBOS = new ArrayList<>();

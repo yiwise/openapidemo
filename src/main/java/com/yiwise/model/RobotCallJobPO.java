@@ -121,7 +121,7 @@ public class RobotCallJobPO implements Serializable {
      * TIMESTAMP(19)
      * 任务开始时间 1. 手动任务，就是手动任务点击开始的时间 2. 自动任务，就是用户设置的开始日期
      */
-    private LocalDateTime startTime;
+    private String startTime;
 
     /**
      * BIGINT(19) 必填
@@ -337,13 +337,6 @@ public class RobotCallJobPO implements Serializable {
         this.deleted = deleted;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
 
     public Long getCreatedByUserId() {
         return createdByUserId;
@@ -431,5 +424,13 @@ public class RobotCallJobPO implements Serializable {
 
     public void setEarlyWarningAlertUsers(Set<Long> earlyWarningAlertUsers) {
         this.earlyWarningAlertUsers = earlyWarningAlertUsers;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 }
