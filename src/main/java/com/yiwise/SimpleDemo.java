@@ -15,8 +15,6 @@ import java.util.*;
  */
 public class SimpleDemo {
 
-//    public static String APP_KEY = "WPFZXuFdwogAZmyw";
-//    public static String APP_SECRET = "LlzdUeqsCzsEoMmOODMjEIGGhOqiGzED";
     public static String APP_KEY = "gvlfIPLJTMEAHgyM";
     public static String APP_SECRET = "TuPngoiRCvpxYdOHcQOsWYvaLGhATNiW";
 
