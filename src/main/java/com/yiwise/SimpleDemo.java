@@ -15,10 +15,8 @@ import java.util.*;
  */
 public class SimpleDemo {
 
-//    public static String APP_KEY = "gvlfIPLJTMEAHgyM";
-//    public static String APP_SECRET = "TuPngoiRCvpxYdOHcQOsWYvaLGhATNiW";
-    public static String APP_KEY = "WPFZXuFdwogAZmyw";
-    public static String APP_SECRET = "LlzdUeqsCzsEoMmOODMjEIGGhOqiGzED";
+    public static String APP_KEY = "gvlfIPLJTMEAHgyM";
+    public static String APP_SECRET = "TuPngoiRCvpxYdOHcQOsWYvaLGhATNiW";
 
     public static final String TENANT_SIGN = "zhongna";
 
@@ -28,7 +26,7 @@ public class SimpleDemo {
 //    public static final String URL = "http://127.0.0.1:8060";
 
     public static void main(String[] args) {
-        getTenant();
+//        getTenant();
 //        getPhoneList();
 //        getDialogFlowList();
 //
@@ -104,7 +102,7 @@ public class SimpleDemo {
     private static void getJobDetail() {
         String url = URL+"/apiOpen/v1/job/getJobDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=121";
+        url = url+"?robotCallJobId=1345";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -138,7 +136,7 @@ public class SimpleDemo {
     private static void callDetail() {
         String url = URL+"/apiOpen/v1/callRecord/callDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?callRecordId=126";
+        url = url+"?callRecordId=1204995";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
