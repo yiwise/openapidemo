@@ -15,21 +15,22 @@ import java.util.*;
  */
 public class SimpleDemo {
 
-    public static String APP_KEY = "gvlfIPLJTMEAHgyM";
-    public static String APP_SECRET = "TuPngoiRCvpxYdOHcQOsWYvaLGhATNiW";
+    public static String APP_KEY = "NwzmSQZSdzyucxAb";
+    public static String APP_SECRET = "LBcoqUbPRhopfdboowgAUawlnNgDsKDU";
 
-    public static final String TENANT_SIGN = "zhongna";
+    public static final String TENANT_SIGN = "weidaiwang";
 
     public static final String VERSION = "v1";
 
-    public static final String URL = "https://openapi.tanyibot.com";
+//    public static final String URL = "https://openapi.tanyibot.com";
+    public static final String URL = "https://crm.yiwise.com";
 //    public static final String URL = "http://127.0.0.1:8060";
 
     public static void main(String[] args) {
 //        getTenant();
 //        getPhoneList();
 //        getDialogFlowList();
-//
+
 //        getJobs();
 //        getJobDetail();
 //
