@@ -31,8 +31,8 @@ public class SimpleDemo {
 //        getPhoneList();
 //        getDialogFlowList();
 
-//        getJobs();
-//        getJobDetail();
+        getJobs();
+        getJobDetail();
 //
 //        getCallRecordInfoList();
 //        callDetail();
