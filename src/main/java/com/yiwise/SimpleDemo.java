@@ -27,17 +27,17 @@ public class SimpleDemo {
 //    public static final String URL = "http://127.0.0.1:8060";
 
     public static void main(String[] args) {
-        getTenant();
-        getPhoneList();
-        getDialogFlowList();
+//        getTenant();
+//        getPhoneList();
+//        getDialogFlowList();
+//
+//        getJobs();
+//        getJobDetail();
+//
+//        getCallRecordInfoList();
+//        callDetail();
 
-        getJobs();
-        getJobDetail();
-
-        getCallRecordInfoList();
-        callDetail();
-
-//        createTask();
+        createTask();
 //        deleteTask();
 //        updateTask();
 //        pauseTask();
@@ -154,7 +154,7 @@ public class SimpleDemo {
         robotCallJobPO.setDialogFlowId(129L);
         robotCallJobPO.setName("测试名称1011-03");
         robotCallJobPO.setMode("MANUAL");
-        robotCallJobPO.setRobotCount(1);
+//        robotCallJobPO.setRobotCount(1);
         robotCallJobPO.setDailyStartTime(LocalTime.of(9, 0));
         robotCallJobPO.setDailyEndTime(LocalTime.of(20, 0));
         robotCallJobPO.setInactiveStartTime(LocalTime.of(12, 0));
@@ -173,6 +173,7 @@ public class SimpleDemo {
         robotCallJobPO.setEarlyWarningAlertUsers(earlyWarning);
         robotCallJobPO.setStartTime("2018-11-07 05:05:05");
         robotCallJobPO.setWechatSendMethod("SENDTOALL");
+        jsonObject.put("concurrencyQuota", 1);
         jsonObject.put("robotCallJob", robotCallJobPO);
         List<Long> longStringBOS = new ArrayList<>();
         longStringBOS.add(22L);
