@@ -15,10 +15,10 @@ import java.util.*;
  */
 public class SimpleDemo {
 
-    public static String APP_KEY = "yangdehong";
-    public static String APP_SECRET = "123456";
+    public static String APP_KEY = "KmQMFpLYkrzgdJXZ";
+    public static String APP_SECRET = "PbLEWUhpboGxNDCuAhquBjSOqaElqEhA";
 
-    public static final String TENANT_SIGN = "yiwise";
+    public static final String TENANT_SIGN = "sdfa";
 
     public static final String VERSION = "v1";
 
@@ -31,7 +31,7 @@ public class SimpleDemo {
 //        getDialogFlowList();
 //
 //        getJobs();
-        getJobDetail();
+//        getJobDetail();
 //
 //        getCallRecordInfoList();
 //        callDetail();
@@ -42,7 +42,7 @@ public class SimpleDemo {
 //        pauseTask();
 //        stopTask();
 
-//        importTaskCustomer();
+        importTaskCustomer();
 //        startTask();
 //        updateTaskAiCount();
     }
@@ -149,8 +149,8 @@ public class SimpleDemo {
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
         RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
-        robotCallJobPO.setTenantId(73L);
-        robotCallJobPO.setDialogFlowId(129L);
+        robotCallJobPO.setTenantId(79L);
+        robotCallJobPO.setDialogFlowId(113L);
         robotCallJobPO.setName("ydh的openapi测试");
         robotCallJobPO.setMode("MANUAL");
 //        robotCallJobPO.setRobotCount(1);
@@ -158,9 +158,9 @@ public class SimpleDemo {
         robotCallJobPO.setDailyEndTime(LocalTime.of(20, 0));
         robotCallJobPO.setInactiveStartTime(LocalTime.of(12, 0));
         robotCallJobPO.setInactiveEndTime(LocalTime.of(13, 0));
-        robotCallJobPO.setDescription("gthjoitjdjfdk");
+        robotCallJobPO.setDescription("ttttttttttttt");
         robotCallJobPO.setSmsTemplateId(1L);
-        robotCallJobPO.setPhoneType("LANDLINE");
+        robotCallJobPO.setPhoneType("MOBILE");
         Set<String> wechatAlertLevel = new HashSet<>();
         robotCallJobPO.setWechatAlertLevel(wechatAlertLevel);
         Set<String> smsAlertLevel = new HashSet<>();
@@ -175,7 +175,7 @@ public class SimpleDemo {
         jsonObject.put("concurrencyQuota", 1);
         jsonObject.put("robotCallJob", robotCallJobPO);
         List<Long> longStringBOS = new ArrayList<>();
-        longStringBOS.add(743L);
+        longStringBOS.add(438L);
         jsonObject.put("jobPhoneNumberIdList",longStringBOS);
 //        System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
@@ -242,13 +242,13 @@ public class SimpleDemo {
         JSONObject jsonObject = new JSONObject();
         List<CustomerPersonImportVO> customerPersons = new ArrayList<>();
         CustomerPersonImportVO customerPersonImportVO = new CustomerPersonImportVO();
-        customerPersonImportVO.setName("ydh");
-        customerPersonImportVO.setPhoneNumber("18100185002");
+        customerPersonImportVO.setName("发发发");
+        customerPersonImportVO.setPhoneNumber("15788889998");
         Map<String, String> properties = new HashMap<>();
         properties.put("变量", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-        jsonObject.put("robotCallJobId", 1222);
+        jsonObject.put("robotCallJobId", 1227);
         jsonObject.put("customerPersons", customerPersons);
 //        System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
