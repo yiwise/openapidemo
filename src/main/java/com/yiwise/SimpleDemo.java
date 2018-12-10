@@ -30,14 +30,14 @@ public class SimpleDemo {
 //        getTenant();
 //        getPhoneList();
 //        getDialogFlowList();
-//
+
 //        getJobs();
-//        getJobDetail();
+        getJobDetail();
 //
 //        getCallRecordInfoList();
 //        callDetail();
 
-        createTask();
+//        createTask();
 //        deleteTask();
 //        updateTask();
 //        pauseTask();
