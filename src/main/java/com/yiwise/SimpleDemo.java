@@ -30,9 +30,9 @@ public class SimpleDemo {
 //        getTenant();
 //        getPhoneList();
 //        getDialogFlowList();
-
+//
 //        getJobs();
-        getJobDetail();
+//        getJobDetail();
 //
 //        getCallRecordInfoList();
 //        callDetail();
@@ -151,8 +151,8 @@ public class SimpleDemo {
         JSONObject jsonObject = new JSONObject();
         RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
         robotCallJobPO.setTenantId(73L);
-        robotCallJobPO.setDialogFlowId(129L);
-        robotCallJobPO.setName("测试名称1011-03");
+        robotCallJobPO.setDialogFlowId(583L);
+        robotCallJobPO.setName("测试名称1214-01");
         robotCallJobPO.setMode("MANUAL");
 //        robotCallJobPO.setRobotCount(1);
         robotCallJobPO.setDailyStartTime(LocalTime.of(9, 0));
