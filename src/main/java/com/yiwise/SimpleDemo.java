@@ -37,13 +37,13 @@ public class SimpleDemo {
 //        getCallRecordInfoList();
 //        callDetail();
 
-//        createTask();
+        createTask();
 //        deleteTask();
 //        updateTask();
 //        pauseTask();
 //        stopTask();
 
-        importTaskCustomer();
+//        importTaskCustomer();
 //        startTask();
 //        updateTaskAiCount();
     }
@@ -151,8 +151,8 @@ public class SimpleDemo {
         JSONObject jsonObject = new JSONObject();
         RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
         robotCallJobPO.setTenantId(73L);
-        robotCallJobPO.setDialogFlowId(583L);
-        robotCallJobPO.setName("测试名称1214-01");
+        robotCallJobPO.setDialogFlowId(129L);
+        robotCallJobPO.setName("测试名称1011-03");
         robotCallJobPO.setMode("MANUAL");
 //        robotCallJobPO.setRobotCount(1);
         robotCallJobPO.setDailyStartTime(LocalTime.of(9, 0));
@@ -249,7 +249,7 @@ public class SimpleDemo {
         properties.put("变量", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-        jsonObject.put("robotCallJobId", 8627);
+        jsonObject.put("robotCallJobId", 2086);
         jsonObject.put("customerPersons", customerPersons);
 //        System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
