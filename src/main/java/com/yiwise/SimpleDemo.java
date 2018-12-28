@@ -43,8 +43,8 @@ public class SimpleDemo {
 //        pauseTask();
 //        stopTask();
 
-//        importTaskCustomer();
-        startTask();
+        importTaskCustomer();
+//        startTask();
 //        updateTaskAiCount();
     }
 
@@ -152,7 +152,7 @@ public class SimpleDemo {
         RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
         robotCallJobPO.setTenantId(73L);
         robotCallJobPO.setDialogFlowId(129L);
-        robotCallJobPO.setName("测试名称1011-444");
+        robotCallJobPO.setName("测试名称1227-01");
         robotCallJobPO.setMode("MANUAL");
 //        robotCallJobPO.setRobotCount(1);
         robotCallJobPO.setDailyStartTime(LocalTime.of(9, 0));
@@ -249,7 +249,7 @@ public class SimpleDemo {
         properties.put("变量", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-        jsonObject.put("robotCallJobId", 8634);
+        jsonObject.put("robotCallJobId", 12175);
         jsonObject.put("customerPersons", customerPersons);
 //        System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
