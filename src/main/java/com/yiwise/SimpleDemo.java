@@ -30,12 +30,14 @@ public class SimpleDemo {
 //        getTenant();
 //        getPhoneList();
 //        getDialogFlowList();
-//
+
 //        getJobs();
 //        getJobDetail();
+//        getJobStats();
+//        getJobProperties();
 //
-//        getCallRecordInfoList();
-//        callDetail();
+        getCallRecordInfoList();
+        callDetail();
 
 //        createTask();
 //        deleteTask();
@@ -43,7 +45,7 @@ public class SimpleDemo {
 //        pauseTask();
 //        stopTask();
 
-        importTaskCustomer();
+//        importTaskCustomer();
 //        startTask();
 //        updateTaskAiCount();
     }
@@ -103,7 +105,29 @@ public class SimpleDemo {
     private static void getJobDetail() {
         String url = URL+"/apiOpen/v1/job/getJobDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=2086";
+        url = url+"?robotCallJobId=14965";
+        String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
+    /**
+     * 获取某个任务信息
+     * @return
+     */
+    private static void getJobStats() {
+        String url = URL+"/apiOpen/v1/job/getJobStats";
+        Long timestamp = System.currentTimeMillis();
+        url = url+"?robotCallJobId=14965";
+        String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
+    /**
+     * 获取某个任务信息
+     * @return
+     */
+    private static void getJobProperties() {
+        String url = URL+"/apiOpen/v1/job/getJobProperties";
+        Long timestamp = System.currentTimeMillis();
+        url = url+"?robotCallJobId=14965";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -115,14 +139,14 @@ public class SimpleDemo {
         String url = URL+"/apiOpen/v1/callRecord/getCallRecordInfoList";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("robotCallJobId", 28);
+        jsonObject.put("robotCallJobId", 14965);
 //        jsonObject.put("searchWords", "测试");
 //        Set<String> dialStatusEnumSet = new HashSet<>();
 //        dialStatusEnumSet.add("ANSWERED");
 //        jsonObject.put("resultStatuses", dialStatusEnumSet);
-//        Set<String> intentLevelsEnumSet = new HashSet<>();
-//        intentLevelsEnumSet.add("A");
-//        jsonObject.put("intentLevels", intentLevelsEnumSet);
+        Set<String> intentLevelsEnumSet = new HashSet<>();
+        intentLevelsEnumSet.add("B");
+        jsonObject.put("intentLevels", intentLevelsEnumSet);
 //        jsonObject.put("dialogFlowId", 2);
 //        jsonObject.put("pageNum", 1);
 //        jsonObject.put("pageSize", 20);
@@ -137,7 +161,7 @@ public class SimpleDemo {
     private static void callDetail() {
         String url = URL+"/apiOpen/v1/callRecord/callDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?callRecordId=2457790";
+        url = url+"?callRecordId=58544416";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -152,7 +176,7 @@ public class SimpleDemo {
         RobotCallJobPO robotCallJobPO = new RobotCallJobPO();
         robotCallJobPO.setTenantId(73L);
         robotCallJobPO.setDialogFlowId(129L);
-        robotCallJobPO.setName("测试名称1227-01");
+        robotCallJobPO.setName("测试名称0110-01");
         robotCallJobPO.setMode("MANUAL");
 //        robotCallJobPO.setRobotCount(1);
         robotCallJobPO.setDailyStartTime(LocalTime.of(9, 0));
@@ -202,7 +226,7 @@ public class SimpleDemo {
         String url = URL+"/apiOpen/v1/job/start";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 8634);
+        jsonObject.put("robotCallJobId", 14965);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -249,7 +273,7 @@ public class SimpleDemo {
         properties.put("变量", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-        jsonObject.put("robotCallJobId", 12175);
+        jsonObject.put("robotCallJobId", 14965);
         jsonObject.put("customerPersons", customerPersons);
 //        System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
@@ -264,7 +288,7 @@ public class SimpleDemo {
         String url = URL+"/apiOpen/v1/job/updateAiCount";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 1054);
+        jsonObject.put("robotCallJobId", 14965);
         jsonObject.put("robotCount", 1);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
