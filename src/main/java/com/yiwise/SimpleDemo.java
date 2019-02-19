@@ -15,16 +15,16 @@ import java.util.*;
  */
 public class SimpleDemo {
 
-    public static String APP_KEY = "ZbUDDjRzJonhvDCv";
-    public static String APP_SECRET = "ZOPwAaRSShjkDapgXZVLFcDwysMZDmuM";
+    public static String APP_KEY = "yangdehong";
+    public static String APP_SECRET = "123456";
 
-    public static final String TENANT_SIGN = "yangdehong";
+    public static final String TENANT_SIGN = "yiwise";
 
     public static final String VERSION = "v1";
 
-    public static final String URL = "https://openapi.tanyibot.com";
+//    public static final String URL = "https://openapi.tanyibot.com";
 //    public static final String URL = "https://crm.yiwise.com";
-//    public static final String URL = "http://127.0.0.1:8060";
+    public static final String URL = "http://127.0.0.1:8060";
 
     public static void main(String[] args) {
 //        getTenant();
@@ -37,8 +37,8 @@ public class SimpleDemo {
 //        getJobStats();
 //        getJobProperties();
 //
-        getCallRecordInfoList();
-        callDetail();
+//        getCallRecordInfoList();
+//        callDetail();
 
 //        createTask();
 //        deleteTask();
@@ -120,7 +120,7 @@ public class SimpleDemo {
     private static void getJobDetail() {
         String url = URL+"/apiOpen/v1/job/getJobDetail";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=14965";
+        url = url+"?robotCallJobId=1470";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -131,7 +131,7 @@ public class SimpleDemo {
     private static void getJobStats() {
         String url = URL+"/apiOpen/v1/job/getJobStats";
         Long timestamp = System.currentTimeMillis();
-        url = url+"?robotCallJobId=14965";
+        url = url+"?robotCallJobId=1470";
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -241,7 +241,7 @@ public class SimpleDemo {
         String url = URL+"/apiOpen/v1/job/start";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 14965);
+        jsonObject.put("robotCallJobId", 16123);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -288,7 +288,7 @@ public class SimpleDemo {
         properties.put("变量", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-        jsonObject.put("robotCallJobId", 14965);
+        jsonObject.put("robotCallJobId", 16123);
         jsonObject.put("customerPersons", customerPersons);
 //        System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
