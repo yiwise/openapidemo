@@ -30,6 +30,7 @@ public class SimpleDemo {
 //        getTenant();
 //        getPhoneList();
 //        getDialogFlowList();
+//        updateIsvInfo();
 
 //        getJobs();
 //        getJobDetail();
@@ -80,6 +81,20 @@ public class SimpleDemo {
         String url = URL+"/apiOpen/v1/dialogFlow/getDialogFlowList";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
+
+    /**
+     * 创建任务
+     * @return
+     */
+    private static void updateIsvInfo()  {
+        String url = URL+"/apiOpen/v1/isv/updateIsvInfo";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("tenantSign", "yiwise");
+        jsonObject.put("callbackUrl", "http:999999999");
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
 
