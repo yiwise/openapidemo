@@ -30,10 +30,11 @@ public class SimpleDemo {
 //        getTenant();
 //        getPhoneList();
 //        getDialogFlowList();
+        updateIsvInfo();
 
 //        getJobs();
 //        getJobDetail();
-        getJobStats();
+//        getJobStats();
 //        getJobProperties();
 //
 //        getCallRecordInfoList();
@@ -80,6 +81,20 @@ public class SimpleDemo {
         String url = URL+"/apiOpen/v1/dialogFlow/getDialogFlowList";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
+
+    /**
+     * 创建任务
+     * @return
+     */
+    private static void updateIsvInfo()  {
+        String url = URL+"/apiOpen/v1/isv/updateIsvInfo";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("tenantSign", "yiwise");
+        jsonObject.put("callbackUrl", "http:999999999");
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
 
@@ -226,7 +241,7 @@ public class SimpleDemo {
         String url = URL+"/apiOpen/v1/job/start";
         Long timestamp = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("robotCallJobId", 14965);
+        jsonObject.put("robotCallJobId", 16123);
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
@@ -273,7 +288,7 @@ public class SimpleDemo {
         properties.put("变量", "jjj");
         customerPersonImportVO.setProperties(properties);
         customerPersons.add(customerPersonImportVO);
-        jsonObject.put("robotCallJobId", 14965);
+        jsonObject.put("robotCallJobId", 16123);
         jsonObject.put("customerPersons", customerPersons);
 //        System.out.println(jsonObject.toJSONString());
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
