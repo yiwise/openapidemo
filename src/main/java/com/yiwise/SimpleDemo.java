@@ -1,5 +1,6 @@
 package com.yiwise;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yiwise.model.CustomerPersonImportVO;
 import com.yiwise.model.RobotCallJobPO;
@@ -30,6 +31,8 @@ public class SimpleDemo {
     public static void main(String[] args) {
 //        getTenant();
 //        getPhoneList();
+        updatePhoneInfoByTenantPhoneNumberId();
+        updatePhonePriceByTenantPhoneNumberId();
 //        getDialogFlowList();
 //        updateIsvInfo();
 
@@ -73,6 +76,44 @@ public class SimpleDemo {
         String url = URL+"/apiOpen/v1/phone/getPhoneList";
         Long timestamp = System.currentTimeMillis();
         String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
+    /**
+     * 电话线列表
+     * @return
+     */
+    private static void updatePhoneInfoByTenantPhoneNumberId() {
+        String url = URL+"/apiOpen/v1/phone/updatePhoneInfoByTenantPhoneNumberId";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("tenantPhoneNumberId", 1010);
+        jsonObject.put("areaCode", "010");
+        jsonObject.put("province", "北京市");
+        jsonObject.put("city", "朝阳区");
+        JSONArray jsonArray = new JSONArray();
+        JSONObject deadArea = new JSONObject();
+        deadArea.put("prov", "xx省");
+        deadArea.put("city", "xx市");
+        jsonArray.add(deadArea);
+        jsonObject.put("deadArea", jsonArray);
+        jsonObject.put("callOutIndustry", "FINANCE");
+        System.out.println(jsonObject.toJSONString());
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
+    /**
+     * 电话线列表
+     * @return
+     */
+    private static void updatePhonePriceByTenantPhoneNumberId() {
+        String url = URL+"/apiOpen/v1/phone/updatePhonePriceByTenantPhoneNumberId";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("tenantPhoneNumberId", 1010);
+        jsonObject.put("localBillRate", 9999);
+        jsonObject.put("otherBillRate", 9999);
+        System.out.println(jsonObject.toJSONString());
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
 
