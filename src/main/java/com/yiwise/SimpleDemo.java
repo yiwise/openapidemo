@@ -15,16 +15,17 @@ import java.util.*;
  */
 public class SimpleDemo {
 
-    public static String APP_KEY = "yangdehong";
-    public static String APP_SECRET = "123456";
+    public static String APP_KEY = "omnGYOWkFmVKTidb";
+    public static String APP_SECRET = "BxxaOSFObUYQdYrUkgcDhYTkBgWmdiNf";
 
-    public static final String TENANT_SIGN = "yiwise";
+    public static final String TENANT_SIGN = "testver";
 
     public static final String VERSION = "v1";
 
-    public static final String URL = "https://openapi.tanyibot.com";
+//    public static final String URL = "https://openapi.tanyibot.com";
 //    public static final String URL = "https://crm.yiwise.com";
-//    public static final String URL = "http://127.0.0.1:8060";
+    public static final String URL = "http://127.0.0.1:8060";
+
 
     public static void main(String[] args) {
 //        getTenant();
@@ -49,6 +50,8 @@ public class SimpleDemo {
 //        importTaskCustomer();
 //        startTask();
 //        updateTaskAiCount();
+
+        oneTimeCall();
     }
 
     /**
@@ -308,5 +311,27 @@ public class SimpleDemo {
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
     }
+
+    private static void oneTimeCall() {
+        String url = URL+"/apiOpen/v1/job/oneTimeCall";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("dialogFlowId", 5474L);
+        List<Long> jobPhoneNumberIdList = new ArrayList<>();
+        jobPhoneNumberIdList.add(1060L);
+        jsonObject.put("jobPhoneNumberIdList", jobPhoneNumberIdList);
+        jsonObject.put("phoneType", "LANDLINE");
+
+        List<CustomerPersonImportVO> customerPersons = new ArrayList<>();
+        CustomerPersonImportVO customerPersonImportVO = new CustomerPersonImportVO();
+        customerPersonImportVO.setName("小红羊");
+        customerPersonImportVO.setPhoneNumber("15088790310");
+        customerPersons.add(customerPersonImportVO);
+        jsonObject.put("customerPersons", customerPersons);
+
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
+
 
 }
