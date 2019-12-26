@@ -16,10 +16,10 @@ import java.util.*;
  */
 public class SimpleDemo {
 
-    public static String APP_KEY = "omnGYOWkFmVKTidb";
-    public static String APP_SECRET = "BxxaOSFObUYQdYrUkgcDhYTkBgWmdiNf";
+    public static String APP_KEY = "yangdehong";
+    public static String APP_SECRET = "123456";
 
-    public static final String TENANT_SIGN = "testver";
+    public static final String TENANT_SIGN = "yiwise";
 
     public static final String VERSION = "v1";
 
@@ -31,8 +31,8 @@ public class SimpleDemo {
     public static void main(String[] args) {
 //        getTenant();
 //        getPhoneList();
-        updatePhoneInfoByTenantPhoneNumberId();
-        updatePhonePriceByTenantPhoneNumberId();
+//        updatePhoneInfoByTenantPhoneNumberId();
+//        updatePhonePriceByTenantPhoneNumberId();
 //        getDialogFlowList();
 //        updateIsvInfo();
 
@@ -54,7 +54,8 @@ public class SimpleDemo {
 //        startTask();
 //        updateTaskAiCount();
 
-        oneTimeCall();
+//        oneTimeCall();
+        eavesdropNotify();
     }
 
     /**
@@ -369,6 +370,27 @@ public class SimpleDemo {
         customerPersonImportVO.setPhoneNumber("15088790310");
         customerPersons.add(customerPersonImportVO);
         jsonObject.put("customerPersons", customerPersons);
+
+        Map<String, String> properties = new HashMap<>();
+        properties.put("1", "我是一个超级大好人");
+        jsonObject.put("properties", properties);
+
+        System.out.println(jsonObject.toJSONString());
+
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
+
+    private static void eavesdropNotify() {
+        String url = URL+"/apiOpen/v1/job/eavesdropNotify";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("caseNo", "20239232897897");
+        jsonObject.put("caller", "1000");
+        jsonObject.put("callee", "1001");
+
+
+        System.out.println(jsonObject.toJSONString());
 
         String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
         System.out.println(result);
