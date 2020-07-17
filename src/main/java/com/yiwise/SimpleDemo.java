@@ -29,10 +29,11 @@ public class SimpleDemo {
 
 
     public static void main(String[] args) {
+        reAddCustomerToJob();
 //        getTenant();
 //        getPhoneList();
-        updatePhoneInfoByTenantPhoneNumberId();
-        updatePhonePriceByTenantPhoneNumberId();
+//        updatePhoneInfoByTenantPhoneNumberId();
+//        updatePhonePriceByTenantPhoneNumberId();
 //        getDialogFlowList();
 //        updateIsvInfo();
 
@@ -54,7 +55,7 @@ public class SimpleDemo {
 //        startTask();
 //        updateTaskAiCount();
 
-        oneTimeCall();
+//        oneTimeCall();
     }
 
     /**
@@ -374,5 +375,14 @@ public class SimpleDemo {
         System.out.println(result);
     }
 
+    private static void reAddCustomerToJob()  {
+        String url = URL+"/apiOpen/v1/job/reAddCustomerToJob";
+        Long timestamp = System.currentTimeMillis();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("robotCallJobId", 5325);
+        jsonObject.put("customerPersonIds", Arrays.asList(11841135, 11841094));
+        String result = HttpUrlConnectionUtils.doPost(url, jsonObject.toJSONString(), APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
+    }
 
 }
