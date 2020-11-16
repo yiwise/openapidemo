@@ -28,8 +28,11 @@ public class SimpleDemo {
     public static final String URL = "http://127.0.0.1:8060";
 
 
-    public static void main(String[] args) {
-        reAddCustomerToJob();
+    public static void main(String[] args) throws UnsupportedEncodingException {
+//        MessageDigest md = DigestUtils.getSha256Digest();
+//        byte[] result = md.digest("testopenapiappKey=VIZAUBsPBybeKwIx&appSecret=vdEXVJCrFNLVHndcqfIFebskWlfYPvZD&tenantSign=testopenapi&version=v1&timestamp=1595298439679".getBytes("UTF-8"));
+//        System.out.println(Hex.encodeHexString(result));
+//        reAddCustomerToJob();
 //        getTenant();
 //        getPhoneList();
 //        updatePhoneInfoByTenantPhoneNumberId();
@@ -37,7 +40,7 @@ public class SimpleDemo {
 //        getDialogFlowList();
 //        updateIsvInfo();
 
-//        getJobs();
+        getJobs();
 //        getJobDetail();
 //        getJobStats();
 //        getJobProperties();
@@ -56,6 +59,14 @@ public class SimpleDemo {
 //        updateTaskAiCount();
 
 //        oneTimeCall();
+//        getIntentLevel();
+    }
+
+    private static void getIntentLevel() {
+        String url = URL+"/apiOpen/v1/intentLevelTag/getIntentLevelTag?intentLevelTagId=783";
+        Long timestamp = System.currentTimeMillis();
+        String result = HttpUrlConnectionUtils.doGet(url, APP_KEY, APP_SECRET, TENANT_SIGN, VERSION, timestamp.toString());
+        System.out.println(result);
     }
 
     /**
