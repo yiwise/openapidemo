@@ -16,17 +16,14 @@ import java.util.*;
  * @date : 2018/9/30 12:03
  */
 public class SimpleDemo {
-
-    public static String APP_KEY = "omnGYOWkFmVKTidb";
-    public static String APP_SECRET = "BxxaOSFObUYQdYrUkgcDhYTkBgWmdiNf";
-
+    /**
+     * APP_KEY等信息，可以在 AICC 页面（aicc.tanyibot.com）顶部“企业” -> 左侧菜单"开放平台" 里自助生成和修改。
+     */
+    public static final String APP_KEY = "omnGYOWkFmVKTidb";
+    public static final String APP_SECRET = "BxxaOSFObUYQdYrUkgcDhYTkBgWmdiNf";
     public static final String TENANT_SIGN = "testver";
-
     public static final String VERSION = "v1";
-
-//    public static final String URL = "https://openapi.tanyibot.com";
-//    public static final String URL = "https://crm.yiwise.com";
-    public static final String URL = "http://127.0.0.1:8060";
+    public static final String URL = "https://openapi.tanyibot.com";
 
 
     public static void main(String[] args) throws UnsupportedEncodingException {
