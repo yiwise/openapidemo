@@ -19,6 +19,9 @@ public class HttpUrlConnectionUtils {
         HttpURLConnection connection = null;
         try {
             url = new URL(urlStr);
+            if("https".equalsIgnoreCase(url.getProtocol())){
+                SSLUtils.ignoreSsl();
+            }
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setDoInput(true);
@@ -45,6 +48,8 @@ public class HttpUrlConnectionUtils {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -59,6 +64,9 @@ public class HttpUrlConnectionUtils {
         HttpURLConnection connection = null;
         try {
             url = new URL(urlStr);
+            if("https".equalsIgnoreCase(url.getProtocol())) {
+                SSLUtils.ignoreSsl();
+            }
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setDoInput(true);
@@ -91,7 +99,8 @@ public class HttpUrlConnectionUtils {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
-
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (connection != null) {
                 connection.disconnect();
